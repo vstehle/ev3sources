@@ -1,13 +1,21 @@
-#! /bin/bash
+#!/bin/bash
+set -e
 
 src=$(pwd)
 cd ../adk/lmsbmp
 
+tmp="$(mktemp -d --tmpdir bmp.XXX)"
+here="$(pwd)"
+cd "$tmp"
+
 cp "$src"/"$1".xbm bitmap.bmp
 
-gcc -o bitmapconverter bitmapconverter.c
+gcc -I. -o bitmapconverter "$here/bitmapconverter.c"
 chmod +x bitmapconverter
 ./bitmapconverter
 mv bitmap.rgf "$src"/"$2".rgf
 rm bitmap.bmp
 rm "$src"/"$1".xbm
+rm bitmapconverter
+cd -
+rmdir "$tmp"
