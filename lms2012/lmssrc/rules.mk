@@ -70,8 +70,8 @@ $(foreach program,$(PROGRAMS_TASM),\
 
 define GRAPHIC_rule
 $$(call space,$$(APP)/$1).rgf: $$(call space,$2).bmp .dirstamp | ../.convert-check
-	$$(BMP_TO_XBM) "$$<" $(basename $@)-bitmap.xbm
-	$$(XBM_TO_RGF) $(basename $@)-bitmap "$$(basename $$@)"
+	$$(BMP_TO_XBM) "$$<" $$(basename $$@)-bitmap.xbm
+	$$(XBM_TO_RGF) $$(basename $$@)-bitmap "$$(basename $$@)"
 $$(call space,$$(foreach to,$$(INSTALL_TO),$$(INSTALL_DIR_$$(to))/$1.rgf)): $$(call space,$$(APP)/$1).rgf .dirstamp_install
 	cp "$$<" "$$@"
 endef
